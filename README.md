@@ -1,4 +1,4 @@
-# Javascript testing with Jasmine and Teaspoon
+# Learn Jasmine and Teaspoon
 
 This project will take you from project setup to writing tests for your Ruby on Rails applications and engines using [jasmine][jasmine] and [teaspoon][teaspoon].
 
