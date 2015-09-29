@@ -30,5 +30,15 @@ describe('reachability', function() {
     });
   });
 
+  describe('sendEvent', function() {
+    it('dispatches an event', function() {
+      spyOn(document, 'dispatchEvent');
+
+      sendEvent('foobar');
+      
+      expect(document.dispatchEvent).toHaveBeenCalled();
+    });
+  });
+
 });
 

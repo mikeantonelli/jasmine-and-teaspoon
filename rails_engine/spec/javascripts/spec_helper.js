@@ -30,3 +30,17 @@
 // the configuration and use this file as a manifest.
 //
 // For more information: http://github.com/modeset/teaspoon
+
+// Shim required for PhantomJS
+var CustomEvent = function(event, params) {
+    var evt;
+    params = params || {
+            bubbles: false,
+            cancelable: false,
+        };
+    evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(event, params.bubbles, params.cancelable);
+    return evt;
+};
+CustomEvent.prototype = window.Event.prototype;
+window.CustomEvent = CustomEvent;
