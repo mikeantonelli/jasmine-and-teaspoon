@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+# Mount rails_engine to simulate a mounted Rails Engine
+gem 'rails_engine', path: '../rails_engine'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
