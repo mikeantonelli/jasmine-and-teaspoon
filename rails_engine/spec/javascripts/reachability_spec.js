@@ -33,10 +33,14 @@ describe('reachability', function() {
   describe('sendEvent', function() {
     it('dispatches an event', function() {
       spyOn(document, 'dispatchEvent');
+      spyOn(window, 'CustomEvent');
 
-      sendEvent('foobar');
+      var fooEventName = 'foobar';
+
+      sendEvent(fooEventName);
       
       expect(document.dispatchEvent).toHaveBeenCalled();
+      expect(window.CustomEvent).toHaveBeenCalledWith(fooEventName, { bubbles : true, cancelable : true });
     });
   });
 
