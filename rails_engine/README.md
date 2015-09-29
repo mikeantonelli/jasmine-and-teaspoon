@@ -220,5 +220,88 @@ and re-run tests:
 
 Coverage didn't change, but that's okay.. we'll get there. Can you write the rest of the tests for our other variables above?
 
+### 3. Test dispatching events
+
+The `sendEvent` API dispatches an event that can be bound to, let's test event dispatching.
+
+#### Setup
+
+Phantom-JS does not have the CustomEvent API that we're using, so let's add a shim to ensure the API is avilable.
+
+```javascript
+// spec/javascripts/spec_helper.js
+
+// Shim required for PhantomJS
+var CustomEvent = function(event, params) {
+    var evt;
+    params = params || {
+            bubbles: false,
+            cancelable: false,
+        };
+    evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(event, params.bubbles, params.cancelable);
+    return evt;
+};
+CustomEvent.prototype = window.Event.prototype;
+window.CustomEvent = CustomEvent;
+```
+
+#### What to test?
+
+```javascript
+var sendEvent = function(eventName) {
+  document.dispatchEvent(new CustomEvent(eventName, {
+    bubbles: true,
+    cancelable: true
+  }));
+};
+```
+
+Looking at the javascript we'll want to test that calling this API dispatches an event. Let's add a new test to `reachability_spec.js`.
+
+```javascript
+  describe('sendEvent', function() {
+    it('dispatches an event', function() {
+      sendEvent('foobar');
+      pending();
+    });
+  });
+```
+
+To ensure that an event was dispatched, we can `spyOn` `document.dispatchEvent` and expect it `toHaveBeenCalled`.
+
+```javascript
+  describe('sendEvent', function() {
+    it('dispatches an event', function() {
+      spyOn(document, 'dispatchEvent');
+
+      sendEvent('foobar');
+
+      expect(document.dispatchEvent).toHaveBeenCalled();
+    });
+  });
+```
+
+Now let's re-run our tests:
+
+```
+  $ bundle exec rake teaspoon
+  .....sendEvent
+  .
+
+  Finished in 0.00600 seconds
+  6 examples, 0 failures
+
+  =============================== Coverage summary ===============================
+  Statements   : 50% ( 12/24 )
+  Branches     : 0% ( 0/4 )
+  Functions    : 14.29% ( 1/7 )
+  Lines        : 50% ( 12/24 )
+  ================================================================================
+```
+
+We've increased coverage, and we can see our `console.info('sendEvent')`. We can do better though, can you write a spy for `CustomEvent` to make sure the right `eventName` is passed?
+
+
 [istanbul]: https://github.com/gotwarlost/istanbul
 
