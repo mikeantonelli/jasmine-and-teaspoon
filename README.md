@@ -34,6 +34,15 @@ This project assumes the following:
   $ git clone <repo> && cd jasmine-and-teaspoon
 ```
 
+# Lessons
+
+## 1. Project Setup
+
+Install and configure teaspoon and jasmine.
+
+### [Rails Application](rails_server#1-project-setup)
+### [Rails Engine](rails_engine#1-project-setup)
+
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
 [rvm]: https://rvm.io/rvm/install
