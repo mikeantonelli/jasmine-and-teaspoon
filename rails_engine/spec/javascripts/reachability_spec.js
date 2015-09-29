@@ -71,6 +71,26 @@ describe('reachability', function() {
       checkReachability();
       expect(window.sendEvent).toHaveBeenCalledWith(reachabilitySuccessEvent);
     });
+
+    it('dispatches reachabilityErrorEvent on error', function() {
+      spyOn(window, 'sendEvent');
+      spyOn($, "ajax").and.callFake(function(e) {
+        e.error({});
+      });
+
+      checkReachability();
+      expect(window.sendEvent).toHaveBeenCalledWith(reachabilityErrorEvent);
+    });
+
+    it('calls startReachability on complete', function() {
+      spyOn(window, 'startReachability');
+      spyOn($, "ajax").and.callFake(function(e) {
+        e.complete({});
+      });
+
+      checkReachability();
+      expect(window.startReachability).toHaveBeenCalled();
+    });    
   });
 });
 
