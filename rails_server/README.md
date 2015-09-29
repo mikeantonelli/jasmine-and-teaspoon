@@ -71,9 +71,11 @@ Javascript coverage is off by default, because it requires [istanbul][istanbul] 
 
 #### Verify setup
 
+##### CI
+
 ```
   $ bundle exec rake teaspoon
-  
+
   Starting the Teaspoon server...
   Teaspoon running default suite at http://127.0.0.1:61428/teaspoon/default
   startReachability
@@ -89,6 +91,8 @@ Javascript coverage is off by default, because it requires [istanbul][istanbul] 
   Lines        : 60.61% ( 20/33 )
   ================================================================================  
 ```
+
+##### GUI
 
 ```
   $ bundle exec rails s
