@@ -21,6 +21,4 @@ Returns 200 (OKAY).
 
 ## Javascript
 
-[reachability.js](assets/javascripts/rails_engine/reachability.js)
-
-Provides a basic health check, on a timer, and fires events on success/failure.
+[reachability.js](assets/javascripts/rails_engine/reachability.js) - Provides a basic health check, on a timer, and fires events on success/failure.
