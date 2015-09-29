@@ -16,4 +16,6 @@ gemspec
 group :development, :test do
   # Javascript testing framework
   gem 'teaspoon-jasmine'
+  # Add Jquery to our test environment
+  gem 'jquery-rails'
 end

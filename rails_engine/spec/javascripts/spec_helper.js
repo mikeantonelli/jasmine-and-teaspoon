@@ -31,6 +31,8 @@
 //
 // For more information: http://github.com/modeset/teaspoon
 
+//= require jquery
+
 // Shim required for PhantomJS
 var CustomEvent = function(event, params) {
     var evt;

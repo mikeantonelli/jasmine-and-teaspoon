@@ -44,5 +44,33 @@ describe('reachability', function() {
     });
   });
 
+  describe('checkReachability', function() {
+    beforeEach(function() {
+      stopReachability();
+    });
+
+    it('makes an ajax call', function() {
+      spyOn(window, 'stopReachability');
+      spyOn($, "ajax");
+
+      checkReachability();
+
+      expect(window.stopReachability).toHaveBeenCalled();
+      expect($.ajax.calls.mostRecent().args[0].url).toEqual(reachabilityEndpoint);
+      expect($.ajax.calls.mostRecent().args[0].type).toEqual(reachabilityHTTPMethod);
+      expect($.ajax.calls.mostRecent().args[0].cache).toEqual(false);
+      expect($.ajax.calls.mostRecent().args[0].timeout).toEqual(reachabilityTimeout);
+    });
+
+    it('dispatches reachabilitySuccessEvent on success', function() {
+      spyOn(window, 'sendEvent');
+      spyOn($, "ajax").and.callFake(function(e) {
+        e.success({});
+      });
+
+      checkReachability();
+      expect(window.sendEvent).toHaveBeenCalledWith(reachabilitySuccessEvent);
+    });
+  });
 });
 
