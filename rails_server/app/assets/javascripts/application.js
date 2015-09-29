@@ -14,3 +14,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require rails_engine/application
+
+$(document).ready(function() {
+  $('#reachability').hide();
+  document.addEventListener(reachabilitySuccessEvent, reachabilitySuccessHandler);
+  document.addEventListener(reachabilityErrorEvent, reachabilityErrorHandler);
+  startReachability();
+});
+
+var reachabilitySuccessHandler = function(event) {
+  $('#reachability').hide();
+};
+
+var reachabilityErrorHandler = function(event) {
+  $('#reachability').show();
+};
