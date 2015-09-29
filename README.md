@@ -69,6 +69,10 @@ Install and configure teaspoon and jasmine.
 
 ### [reachability.js](rails_engine#5-coverage-lies)
 
+## 6. JQuery Matchers
+
+### [application.js](rails_application#6-jquery-matchers)
+
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
 [rvm]: https://rvm.io/rvm/install

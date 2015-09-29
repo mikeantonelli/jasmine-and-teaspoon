@@ -100,4 +100,47 @@ Javascript coverage is off by default, because it requires [istanbul][istanbul] 
 
 * Open [http://localhost:3000/teaspoon](http://localhost:3000/teaspoon)
 
+### 6. JQuery Matchers
+
+There are a lot of helpful things that JQuery can do, but they can also be very difficult to test with pure javascript. [jasmine-jquery](https://github.com/velesin/jasmine-jquery) exists to help create custom matchers for jasmine.
+
+It's installed in `vendor/assets/javascripts`, but in your own project [there are many ways to install the custom matchers](https://github.com/velesin/jasmine-jquery#installation).
+
+Let's require these matchers in `rails_server/spec/javascripts/spec_helper.js`:
+
+```javascript
+//= require jasmine-jquery
+```
+
+Now let's add our first test file
+
+```
+  $ echo "describe('application', function() { pending(); });" >> spec/javascripts/application_spec.js
+```
+
+Now let's look at `application.js` in our rails_server:
+
+```javascript
+$(document).ready(function() {
+  $('#reachability').hide();
+  document.addEventListener(reachabilitySuccessEvent, reachabilitySuccessHandler);
+  document.addEventListener(reachabilityErrorEvent, reachabilityErrorHandler);
+  startReachability();
+});
+
+var reachabilitySuccessHandler = function(event) {
+  $('#reachability').hide();
+};
+
+var reachabilityErrorHandler = function(event) {
+  $('#reachability').show();
+};
+```
+
+We've got some event bindings, and we're showing/hiding a div. Let's add a test to ensure that the div is hidden when the page loads.
+
+```
+
+```
+
 [istanbul]: https://github.com/gotwarlost/istanbul

@@ -30,3 +30,6 @@
 // the configuration and use this file as a manifest.
 //
 // For more information: http://github.com/modeset/teaspoon
+//
+// Add custom matchers for jquery
+//= require jasmine-jquery
