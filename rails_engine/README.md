@@ -15,7 +15,7 @@ This project was generated using:
 
 ## API
 
-#### [HEAD|GET] /heath
+#### [HEAD|GET] /health
 
 Returns 200 (OKAY).
 
