@@ -43,6 +43,10 @@ Install and configure teaspoon and jasmine.
 ### [Rails Application](rails_server#1-project-setup)
 ### [Rails Engine](rails_engine#1-project-setup)
 
+## 2. Write some tests
+
+### [reachability.js](rails_engine#2-write-some-tests)
+
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
 [rvm]: https://rvm.io/rvm/install

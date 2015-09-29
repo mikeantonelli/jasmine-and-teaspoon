@@ -116,7 +116,7 @@ Javascript coverage is off by default, because it requires [istanbul][istanbul] 
 
   Starting the Teaspoon server...
   Teaspoon running default suite at http://127.0.0.1:61428/teaspoon/default
-  
+
 
   Finished in 0.00100 seconds
   0 examples, 0 failures
@@ -139,6 +139,86 @@ The GUI needs to be run from within the engine's dummy application
 ```
 
 * Open [http://localhost:3000/teaspoon](http://localhost:3000/teaspoon)
+
+### 2. Write some tests
+
+Let's fix that coverage we see above...
+
+Before we start, it would probably be helpful to familiarize yourself with [jasmine's API](http://jasmine.github.io/2.0/introduction.html)
+
+### Add a new test file
+
+Assuming you're in rails_engine root folder
+
+```
+  $ echo "pending();" >> spec/javascripts/reachability_spec.js   
+```
+
+Now we'll run our tests, and check the output:
+
+```
+  $ bundle exec rake teaspoon
+  => marked Pending
+    # jasmine/2.2.0.self-36ccb16d3b8cb028dbb4ba8678e420e521189afd8d74fe536f6f321c86afeb59.js:872 -- pending
+    # jasmine/2.2.0.self-36ccb16d3b8cb028dbb4ba8678e420e521189afd8d74fe536f6f321c86afeb59.js:3014 -- pending
+
+  Finished in 0.00200 seconds
+  0 examples, 0 failures
+
+  =============================== Coverage summary ===============================
+  Statements   : 41.67% ( 10/24 )
+  Branches     : 0% ( 0/4 )
+  Functions    : 0% ( 0/7 )
+  Lines        : 41.67% ( 10/24 )
+  ================================================================================  
+```
+
+Great, we've got a placeholder test.. now let's take a look at reachability.js
+
+```javascript
+...
+var reachabilitySuccessEvent = 'reachability:success'
+var reachabilityErrorEvent   = 'reachability:error'
+var reachabilityHTTPMethod = 'HEAD'
+var reachabilityEndpoint = '/health'
+var reachabilityTimeout = 5000;
+...
+```
+
+Let's write an easy expectations first
+
+```
+describe('reachability', function() {
+
+  describe('reachabilitySuccessEvent', function() {
+    it('equals reachability:success', function() {
+      expect(reachabilitySuccessEvent).toEqual('reachability:success');
+    });
+  });
+
+});
+```
+
+and re-run tests:
+
+```
+  $ bundle exec rake teaspoon
+    Starting the Teaspoon server...
+    Teaspoon running default suite at http://127.0.0.1:64783/teaspoon/default
+    .
+
+    Finished in 0.00400 seconds
+    1 example, 0 failures
+
+    =============================== Coverage summary ===============================
+    Statements   : 41.67% ( 10/24 )
+    Branches     : 0% ( 0/4 )
+    Functions    : 0% ( 0/7 )
+    Lines        : 41.67% ( 10/24 )
+    ================================================================================ 
+```
+
+Coverage didn't change, but that's okay.. we'll get there. Can you write the rest of the tests for our other variables above?
 
 [istanbul]: https://github.com/gotwarlost/istanbul
 
