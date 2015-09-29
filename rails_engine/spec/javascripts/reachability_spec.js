@@ -92,5 +92,43 @@ describe('reachability', function() {
       expect(window.startReachability).toHaveBeenCalled();
     });    
   });
+
+  describe('startReachability', function() {
+    beforeEach(function() {
+      stopReachability();
+    });
+
+    it('assigns reachabilityInterval when unset', function() {
+      spyOn(window, 'setInterval').and.callThrough();
+
+      startReachability();
+
+      expect(window.setInterval).toHaveBeenCalledWith(checkReachability, reachabilityTimeout);
+      expect(reachabilityInterval).not.toBeNull();
+    });
+
+    it('does not assign reachabilityInterval when set', function() {
+      reachabilityInterval = function() {};
+      spyOn(window, 'setInterval').and.callThrough();
+
+      startReachability();
+
+      expect(window.setInterval).not.toHaveBeenCalled();
+    });
+  }); 
+
+  describe('stopReachability', function() {
+    it('invalidates the reachabilityInterval', function() {
+      spyOn(window, 'clearInterval').and.callThrough();
+
+      var existingReachability = reachabilityInterval; 
+
+      stopReachability();
+
+      expect(window.clearInterval).toHaveBeenCalledWith(existingReachability);
+      expect(reachabilityInterval).toBeNull();
+    });
+  });
+
 });
 
