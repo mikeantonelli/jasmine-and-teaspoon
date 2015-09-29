@@ -302,6 +302,108 @@ Now let's re-run our tests:
 
 We've increased coverage, and we can see our `console.info('sendEvent')`. We can do better though, can you write a spy for `CustomEvent` to make sure the right `eventName` is passed?
 
+### 4. Testing ajax calls
+
+When you're testing AJAX calls, you'll want to ensure that you've tested all your branching logic, but who wants to stand up a webserver to run real integration tests?
+
+Let's start by adding another `describe` to `reachability_spec.js`
+
+```javascript
+  describe('checkReachability', function() {
+    beforeEach(function() {
+      // helps with test isolation 
+      stopReachability();
+    });
+
+    it('makes an ajax call', function() {
+      pending();
+    });
+
+    it('dispatches reachabilitySuccessEvent on success', function() {
+      pending();
+    });
+
+    it('dispatches reachabilityErrorEvent on error', function() {
+      pending();
+    });
+
+    it('calls startReachability on complete', function() {
+      pending();
+    });   
+  });
+```
+
+Since we're using jQuery in our dummy app for the first time, we'll need to add the dependency:
+
+```ruby
+# Gemfile
+group :development, :test do
+  gem 'jquery-rails'
+end
+```
+
+We'll also need to expose it in our `spec_helper.js`
+
+```javascript
+
+//= require jquery
+
+```
+
+The first thing we'll want to test, is that the ajax call is even being made. We'll create a spy on `$` rather than `window` since this API makes use of JQuery, and let's not forget that we'll want to ensure our internal API also gets hit, using `spyOn(window, 'stopReachability')`.
+
+Using Jasmine, we can also assert that the ajax call is made with the right configuration:
+
+```javascript
+    it('makes an ajax call', function() {
+      spyOn(window, 'stopReachability');
+      spyOn($, "ajax");
+
+      checkReachability();
+
+      expect(window.stopReachability).toHaveBeenCalled();
+      expect($.ajax.calls.mostRecent().args[0].url).toEqual(reachabilityEndpoint);
+      expect($.ajax.calls.mostRecent().args[0].type).toEqual(reachabilityHTTPMethod);
+      expect($.ajax.calls.mostRecent().args[0].cache).toEqual(false);
+      expect($.ajax.calls.mostRecent().args[0].timeout).toEqual(reachabilityTimeout);
+    });
+```
+
+Now let's re-run our tests:
+
+```
+  $ bundle exec rake teaspoon
+  .....sendEvent
+  .stopReachability
+  checkReachability
+  .
+
+  Finished in 0.00700 seconds
+  7 examples, 0 failures
+
+  =============================== Coverage summary ===============================
+  Statements   : 75% ( 18/24 )
+  Branches     : 0% ( 0/4 )
+  Functions    : 42.86% ( 3/7 )
+  Lines        : 75% ( 18/24 )
+  ================================================================================
+```
+
+Coverage has been increased, but we're still missing our branching logic - we can mock the ajax responses so that we can test each branch:
+
+```javascript
+    it('dispatches reachabilitySuccessEvent on success', function() {
+      spyOn(window, 'sendEvent');
+      spyOn($, "ajax").and.callFake(function(e) {
+        e.success({});
+      });
+
+      checkReachability();
+      expect(window.sendEvent).toHaveBeenCalledWith(reachabilitySuccessEvent);
+    });
+```
+
+By combining `spyOn` with `.and.callFake` we're given context to the function that was called and explicitly call the method that we want - in this case, `success`. Can you write the two other tests for `error` and `complete`?
 
 [istanbul]: https://github.com/gotwarlost/istanbul
 

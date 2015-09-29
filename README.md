@@ -51,6 +51,10 @@ Install and configure teaspoon and jasmine.
 
 ### [reachability.js](rails_engine#3-test-dispatching-events)
 
+## 4. Testing ajax calls
+
+### [reachability.js](rails_engine#4-testing-ajax-calls)
+
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
 [rvm]: https://rvm.io/rvm/install
