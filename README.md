@@ -55,6 +55,10 @@ Install and configure teaspoon and jasmine.
 
 ### [reachability.js](rails_engine#4-testing-ajax-calls)
 
+## 5. Coverage lies
+
+### [reachability.js](rails_engine#5-coverage-lies)
+
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
 [rvm]: https://rvm.io/rvm/install

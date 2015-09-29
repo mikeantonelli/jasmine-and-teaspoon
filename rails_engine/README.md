@@ -405,5 +405,35 @@ Coverage has been increased, but we're still missing our branching logic - we ca
 
 By combining `spyOn` with `.and.callFake` we're given context to the function that was called and explicitly call the method that we want - in this case, `success`. Can you write the two other tests for `error` and `complete`?
 
+### 5. Coverage Lies
+
+Let's open our coverage report, located @ `rails_engine/coverage/default/index.html`
+
+If we click through, to `reachability.js`, we'll see that `stopReachability` looks entirely covered. Jasmine and teaspoon are no different when it comes to coverage - we didn't actually write any tests for that method, but it's been hit by other tests many times.
+
+Can you add the tests for `startReachability` and `stopReachability`?
+
+```javascript
+  describe('startReachability', function() {
+    beforeEach(function() {
+      stopReachability();
+    });
+
+    it('assigns reachabilityInterval when unset', function() {
+      pending();
+    });
+
+    it('does not assign reachabilityInterval when set', function() {
+      pending();
+    });
+  }); 
+
+  describe('stopReachability', function() {
+    it('invalidates the reachabilityInterval', function() {
+      pending();
+    });
+  });
+```
+
 [istanbul]: https://github.com/gotwarlost/istanbul
 
