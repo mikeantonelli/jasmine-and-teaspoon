@@ -42,32 +42,32 @@ Install and configure teaspoon and jasmine.
 
 `git checkout 1-project-setup`
 
-### [Rails Application](rails_server#1-project-setup)
-### [Rails Engine](rails_engine#1-project-setup)
+### [Rails Application](rails_server/#1-project-setup)
+### [Rails Engine](rails_engine/#1-project-setup)
 
 ## 2. Write some tests
 
 `git checkout 2-write-some-tests`
 
-### [reachability.js](rails_engine#2-write-some-tests)
+### [reachability.js](rails_engine/#2-write-some-tests)
 
 ## 3. Test event dispatching
 
 `git checkout 3-dispatching-events`
 
-### [reachability.js](rails_engine#3-test-dispatching-events)
+### [reachability.js](rails_engine/#3-test-dispatching-events)
 
 ## 4. Testing ajax calls
 
 `git checkout 4-ajax`
 
-### [reachability.js](rails_engine#4-testing-ajax-calls)
+### [reachability.js](rails_engine/#4-testing-ajax-calls)
 
 ## 5. Coverage lies
 
 `git checkout 5-coverage-lies`
 
-### [reachability.js](rails_engine#5-coverage-lies)
+### [reachability.js](rails_engine/#5-coverage-lies)
 
 [jasmine]: https://github.com/jasmine/jasmine
 [teaspoon]: https://github.com/modeset/teaspoon
